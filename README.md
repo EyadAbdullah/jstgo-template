@@ -1,0 +1,1 @@
+# jstgo-template
