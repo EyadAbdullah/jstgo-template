@@ -34,14 +34,14 @@ publishing {
       name = "GitHubPackages"
       url = "https://maven.pkg.github.com/EyadAbdullah/${project.name}"
       credentials {
-        username = System.getenv("GITHUB_ACTOR")
-        password = System.getenv("GITHUB_TOKEN")
+        username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+        password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
       }
     }
   }
   publications {
-    maven(MavenPublication) {
-      from components.java
+    gpr(MavenPublication) {
+      from(components.java)
     }
   }
 }
