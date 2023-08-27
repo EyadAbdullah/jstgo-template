@@ -1,25 +1,57 @@
-plugins {
-    id "java-library"
-}
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+group = 'net.jstgo.template'
+version = '0.1.0-alpha'
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
-    jcenter()
-    mavenCentral()
+  jcenter()
+  mavenCentral()
 }
 
 dependencies {
 
-    implementation('com.google.guava:guava:31.1-jre')
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("org.apache.commons:commons-math3:3.6.1")
-    implementation("org.apache.commons:commons-lang3:3.12.0")
-    implementation('commons-io:commons-io:2.11.0')
+  implementation('com.google.guava:guava:31.1-jre')
+  implementation("com.google.code.gson:gson:2.10.1")
+  implementation("org.apache.commons:commons-math3:3.6.1")
+  implementation("org.apache.commons:commons-lang3:3.12.0")
+  implementation('commons-io:commons-io:2.11.0')
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+}
+
+java {
+  withSourcesJar()
+  withJavadocJar()
+}
+
+publishing {
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/jstgo/${project.name}"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR")
+        password = System.getenv("GITHUB_TOKEN")
+      }
+    }
+  }
+  publications {
+    maven(MavenPublication) {
+      from components.java
+    }
+  }
+}
+
+wrapper {
+  gradleVersion = "7.3"
+  distributionType = Wrapper.DistributionType.ALL
 }
 
 test {
-    // Use junit platform for unit tests
-    useJUnitPlatform()
+  useJUnitPlatform()
 }
