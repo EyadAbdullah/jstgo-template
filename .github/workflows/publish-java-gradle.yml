@@ -20,5 +20,7 @@ jobs:
       - name: Publish to JitPack
         run: ./.github/scripts/publish.sh $RELEASE_TAG
         env:
+          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         shell: bash
