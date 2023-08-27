@@ -18,5 +18,5 @@ jobs:
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@e6e38bacfdf1a337459f332974bb2327a31aaf4b
       - name: Publish to JitPack
-        run: ./.github/scripts/build.sh
+        run: ./.github/scripts/publish.sh
         shell: bash
