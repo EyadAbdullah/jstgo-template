@@ -1,6 +1,8 @@
 # JSTGO Template Engine
 
 ![GitHub](https://img.shields.io/github/license/EyadAbdullah/jstgo-template)
+![publish package](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/publish-java-gradle.yml/badge.svg?branch=main)
+![build gradle](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/gradle.yml/badge.svg)
 
 ## Overview
 
