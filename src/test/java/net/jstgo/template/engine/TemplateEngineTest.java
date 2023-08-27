@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.jstgo.template.functions.FnConcat;
 import net.jstgo.template.functions.FnDate;
 import net.jstgo.template.functions.FnNewLine;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -50,9 +50,9 @@ class TemplateEngineTest {
   }
 
   private static void createFile(String name, String content) throws IOException {
-    var file = new File(name);
-    var outputStream = new FileOutputStream(file);
-    IOUtils.write(content, outputStream);
+    FileUtils.forceMkdir(new File(name).getParentFile());
+    var outputStream = new FileOutputStream(name);
+    IOUtils.write(content, outputStream, StandardCharsets.UTF_8);
     outputStream.close();
   }
 
