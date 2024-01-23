@@ -1,0 +1,15 @@
+package net.jstgo.repo.template.tokenizer;
+
+public enum TplTokenType {
+  STRING,
+  NUMBER,
+  KEYWORD,
+  WORD,
+  PUNCTUATION,
+  ARITHMETIC_OPERATOR,
+  RELATIONAL_OPERATOR,
+  ASSIGNMENT_OPERATOR,
+  LOGICAL_OPERATOR,
+  WHITESPACE,
+  OPERATOR;
+}
