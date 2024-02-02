@@ -17,7 +17,7 @@ replaced with actual data during runtime.
 For detailed information on how to use the Template Engine Library, check out our full
 documentation (which still does not exist 😊).
 
-But feel free to ask me on (Slack)[https://jstgo.slack.com/archives/C06GTFATJLV]
+But feel free to ask me on [Slack](https://jstgo.slack.com/archives/C06GTFATJLV)
 
 ## Contributing
 
