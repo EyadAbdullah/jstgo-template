@@ -15,9 +15,69 @@ replaced with actual data during runtime.
 ## Documentation
 
 For detailed information on how to use the Template Engine Library, check out our full
-documentation (which still does not exist 😊).
+documentation ( which still does not exist 😊).
 
-But feel free to ask me on [Slack](https://join.slack.com/t/jstgo/shared_invite/zt-2bw9dhour-TGu9L8XYWqRFjiVllDTl0Q)
+## Implementation
+
+To use Implement Jstgo Template Engine in your Java project, follow these simple steps:
+
+### Gradle
+
+Configure the following in your **build.gradle**
+
+```groovy
+repositories {
+  maven { url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2//" }
+  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+dependencies {
+  implementation 'net.jstgo.repo:template-engine:0.1.0-SNAPSHOT'
+}
+```
+
+### Maven
+
+Configure the following in your **pom.xml**
+
+```xml
+  <dependencies>
+    <dependency>
+      <groupId>net.jstgo.repo</groupId>
+      <artifactId>template-engine</artifactId>
+      <version>0.1.0-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
+  
+  <repositories>
+    <repository>
+      <id>oss.sonatype.org-snapshot</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+      <releases><enabled>false</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+    <repository>
+      <id>oss.sonatype.org</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>false</enabled></snapshots>
+    </repository>
+  </repositories>
+```
+
+## Documentation
+
+Simple example of how to use. 
+
+```java
+  public class Main {
+    public static void main(String[] args) {
+      var engine = new TemplateEngine();
+      var template = engine.processTemplate("5 + 6 = {{ 5 + 6 }}");
+      System.out.println(template.getOutput());
+    }
+  }
+```
 
 ## Contributing
 

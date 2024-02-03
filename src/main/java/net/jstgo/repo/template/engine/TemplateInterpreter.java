@@ -56,7 +56,6 @@ public class TemplateInterpreter {
         .collect(Collectors.toList());
   }
 
-  // TODO: support if statement, Blocks, For loops, ++, --, +=, -=
   private <T extends AstNode> Object interpretNode(T node) {
     if (node instanceof AstIdentifier) {
       var expr = ((AstIdentifier) node).getInit();
@@ -106,9 +105,7 @@ public class TemplateInterpreter {
     } else if (node instanceof AstFunctionCall) {
       var expr = (AstFunctionCall) node;
       var identifier = ((AstIdentifier) expr.getFunc()).getInit();
-      var args = expr.getArgs().stream()
-          .map(this::interpretNode)
-          .collect(Collectors.toList());
+      var args = expr.getArgs().stream().map(this::interpretNode).toList();
       if (!functions.containsKey(identifier)) {
         throw new IllegalStateException(
             String.format("Error: function is undefined '%s' !%n%s", identifier,
@@ -225,6 +222,7 @@ public class TemplateInterpreter {
     return null;
   }
 
+  // TODO: implement
   private Map<String, Object> objectToMap(Object obj) {
     var map = new HashMap<String, Object>();
     for (var field : obj.getClass().getDeclaredFields()) {
