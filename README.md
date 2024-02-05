@@ -35,7 +35,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'net.jstgo.repo:template-engine:0.1.0-SNAPSHOT'
+  implementation 'net.jstgo.repo:template-engine:0.1.0'
 }
 ```
 
@@ -48,7 +48,7 @@ Configure the following in your **pom.xml**
     <dependency>
       <groupId>net.jstgo.repo</groupId>
       <artifactId>template-engine</artifactId>
-      <version>0.1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
   </dependencies>
   
