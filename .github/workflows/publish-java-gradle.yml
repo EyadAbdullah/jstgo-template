@@ -20,7 +20,10 @@ jobs:
       - name: Publish to JitPack
         run: ./.github/scripts/publish.sh $RELEASE_TAG
         env:
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          REPO_PASSWORD: ${{ secrets.REPO_PASSWORD }}
+          REPO_USERNAME: ${{ secrets.REPO_USERNAME }}
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         shell: bash

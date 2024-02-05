@@ -1,9 +1,28 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
+import java.text.SimpleDateFormat
 
-group = 'net.jstgo.template'
-version = '0.1.0-alpha'
+plugins {
+  id 'java'
+  id 'signing'
+  id 'maven-publish'
+}
 
+Properties properties = new Properties()
+if (rootProject.file("gradle-local.properties").exists()) {
+  properties.load(rootProject.file("gradle-local.properties").newDataInputStream())
+}
+
+group = project.findProperty("groupId") ?: System.getenv("groupId")
+version = project.findProperty("version") ?: System.getenv("version")
+Boolean isReleaseVersion = !((String) version).endsWith("SNAPSHOT")
+
+String _creator = project.findProperty("creator") ?: System.getenv("creator")
+String _artifactId = project.findProperty("artifactId") ?: System.getenv("artifactId")
+// local builds aren't allowed to publish to repo
+String _repoUser = project.findProperty("REPO_USERNAME") ?: System.getenv("REPO_USERNAME")
+String _repoPass = project.findProperty("REPO_PASSWORD") ?: System.getenv("REPO_PASSWORD")
+// allow signing for local builds
+String _keyFile = project.findProperty("GPG_PRIVATE_KEY") ?: properties.get("GPG_PRIVATE_KEY") ?: System.getenv("GPG_PRIVATE_KEY")
+String _keyPass = project.findProperty("GPG_PASSPHRASE") ?: properties.get("GPG_PASSPHRASE") ?: System.getenv("GPG_PASSPHRASE")
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
@@ -13,9 +32,7 @@ repositories {
 
 dependencies {
 
-  implementation('com.google.guava:guava:31.1-jre')
   implementation("com.google.code.gson:gson:2.10.1")
-  implementation("org.apache.commons:commons-math3:3.6.1")
   implementation("org.apache.commons:commons-lang3:3.12.0")
   implementation('commons-io:commons-io:2.11.0')
 
@@ -29,26 +46,73 @@ java {
 }
 
 publishing {
-  repositories {
-    maven {
-      name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/EyadAbdullah/${project.name}"
-      credentials {
-        username = System.getenv("GITHUB_ACTOR")
-        password = System.getenv("GITHUB_TOKEN")
+  publications {
+    mavenJava(MavenPublication) {
+      artifactId = _artifactId
+      from components.java
+
+      pom {
+        name = 'Jstgo Template Engine'
+        description = 'Jstgo Template Engine is a Java library to generate text output (HTML web pages, e-mails, configuration files, source code, etc.) based on templates and changing data.'
+        url = 'https://github.com/EyadAbdullah/jstgo-template'
+        licenses {
+          license {
+            name = 'MIT License'
+            url = 'https://opensource.org/licenses/MIT'
+          }
+        }
+        developers {
+          developer {
+            id = 'EyadAbdullah'
+            name = 'Eyad Abdullah'
+            email = 'iyad1998hassan@gmail.com'
+          }
+        }
+        scm {
+          url = 'https://github.com/EyadAbdullah/jstgo-template'
+          connection = 'scm:git:git://github.com/EyadAbdullah/jstgo-template.git'
+          developerConnection = 'scm:git:ssh://github.com/EyadAbdullah'
+        }
       }
     }
   }
-  publications {
-    gpr(MavenPublication) {
-      from(components.java)
+  repositories {
+    maven {
+      def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+      def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+      url = isReleaseVersion ? releasesRepoUrl : snapshotsRepoUrl;
+      credentials {
+        username = _repoUser
+        password = _repoPass
+      }
     }
   }
+}
+
+signing {
+  required { isReleaseVersion && gradle.taskGraph.hasTask("publish") }
+  useInMemoryPgpKeys(_keyFile, _keyPass)
+  sign publishing.publications
 }
 
 wrapper {
   gradleVersion = "7.3"
   distributionType = Wrapper.DistributionType.ALL
+}
+
+jar {
+  manifest {
+    attributes(
+            'Implementation-Vendor': project.group,
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version,
+            'Built-By': _creator,
+            'Created-By': _creator,
+            'Build-Timestamp': new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+            'Build-Jdk': "${System.properties['java.version']} (${System.properties['java.vendor']} ${System.properties['java.vm.version']})",
+            'Build-OS': "${System.properties['os.name']} ${System.properties['os.arch']} ${System.properties['os.version']}"
+    )
+  }
 }
 
 test {

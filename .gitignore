@@ -6,3 +6,5 @@ build
 .idea
 /.idea/
 /output/
+/.env
+gradle-local.properties
