@@ -7,4 +7,4 @@ build
 /.idea/
 /output/
 /.env
-gradle-local.properties
+/gradle-local.properties
