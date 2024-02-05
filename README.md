@@ -30,7 +30,7 @@ Configure the following in your **build.gradle**
 
 ```groovy
 repositories {
-  maven { url "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2//" }
+  maven { url "https://s01.oss.sonatype.org/content/repositories/releases/" }
   maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
 }
 
@@ -61,7 +61,7 @@ Configure the following in your **pom.xml**
     </repository>
     <repository>
       <id>oss.sonatype.org</id>
-      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
       <releases><enabled>true</enabled></releases>
       <snapshots><enabled>false</enabled></snapshots>
     </repository>
