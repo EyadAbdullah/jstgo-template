@@ -29,11 +29,6 @@ To use Implement Jstgo Template Engine in your Java project, follow these simple
 Configure the following in your **build.gradle**
 
 ```groovy
-repositories {
-  maven { url "https://s01.oss.sonatype.org/content/repositories/releases/" }
-  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
-}
-
 dependencies {
   implementation 'net.jstgo.repo:template-engine:0.1.0'
 }
@@ -51,21 +46,6 @@ Configure the following in your **pom.xml**
       <version>0.1.0</version>
     </dependency>
   </dependencies>
-  
-  <repositories>
-    <repository>
-      <id>oss.sonatype.org-snapshot</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
-      <releases><enabled>false</enabled></releases>
-      <snapshots><enabled>true</enabled></snapshots>
-    </repository>
-    <repository>
-      <id>oss.sonatype.org</id>
-      <url>https://s01.oss.sonatype.org/content/repositories/releases/</url>
-      <releases><enabled>true</enabled></releases>
-      <snapshots><enabled>false</enabled></snapshots>
-    </repository>
-  </repositories>
 ```
 
 ## Documentation
