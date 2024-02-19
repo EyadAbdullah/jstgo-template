@@ -4,8 +4,7 @@
 ![build gradle](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/gradle.yml/badge.svg)
 
 
-![Sonatype Nexus (Releases)](https://img.shields.io/nexus/r/net.jstgo.repo/template-engine?server=https%3A%2F%2Fs01.oss.sonatype.org)
-![Sonatype Nexus (Snapshots)](https://img.shields.io/nexus/s/net.jstgo.repo/template-engine?server=https%3A%2F%2Fs01.oss.sonatype.org)
+![![Maven Central (Releases)](https://img.shields.io/maven-central/v/net.jstgo.repo/template-engine)](https://mvnrepository.com/artifact/net.jstgo.repo/template-engine)
 
 
 ## Overview
