@@ -1,10 +1,9 @@
 # JSTGO Template Engine
-[![GitHub](https://img.shields.io/github/license/EyadAbdullah/jstgo-template)](https://github.com/EyadAbdullah/jstgo-template/blob/main/README.md)
-![publish package](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/publish-java-gradle.yml/badge.svg?branch=main)
-![build gradle](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/gradle.yml/badge.svg)
-
+[![GitHub](https://img.shields.io/github/license/EyadAbdullah/jstgo-template)](https://github.com/EyadAbdullah/jstgo-template/blob/main/LICENSE)
 [![Maven Central (Releases)](https://img.shields.io/maven-central/v/net.jstgo.repo/template-engine)](https://mvnrepository.com/artifact/net.jstgo.repo/template-engine)
 
+![publish package](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/publish-java-gradle.yml/badge.svg?branch=main)
+![build gradle](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/gradle.yml/badge.svg)
 
 ## Overview
 
