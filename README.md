@@ -4,7 +4,7 @@
 ![build gradle](https://github.com/EyadAbdullah/jstgo-template/actions/workflows/gradle.yml/badge.svg)
 
 
-![![Maven Central (Releases)](https://img.shields.io/maven-central/v/net.jstgo.repo/template-engine)](https://mvnrepository.com/artifact/net.jstgo.repo/template-engine)
+[![Maven Central (Releases)](https://img.shields.io/maven-central/v/net.jstgo.repo/template-engine)](https://mvnrepository.com/artifact/net.jstgo.repo/template-engine)
 
 
 ## Overview
