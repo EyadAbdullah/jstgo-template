@@ -67,8 +67,7 @@ public class TemplateInterpreter {
       return ((AstBoolean) node).getValue();
     } else if (node instanceof AstString) {
       return ((AstString) node).getValue();
-    } else if (node instanceof AstVariableDeclarator) {
-      var expr = (AstVariableDeclarator) node;
+    } else if (node instanceof AstVariableDeclarator expr) {
       // let = closure-scope, var = global-scope
       var type = expr.getId();
       var assignmentExpr = (AstAssignmentExpr) expr.getInit();
@@ -87,8 +86,7 @@ public class TemplateInterpreter {
       } else if (type.equalsIgnoreCase("var")) {
         globalVariables.putIfAbsent(identifier, value);
       }
-    } else if (node instanceof AstAssignmentExpr) {
-      var expr = (AstAssignmentExpr) node;
+    } else if (node instanceof AstAssignmentExpr expr) {
       var identifier = ((AstIdentifier) expr.getLeft()).getInit();
       var value = interpretNode(expr.getRight());
       if (variables.containsKey(identifier)) {
@@ -102,8 +100,7 @@ public class TemplateInterpreter {
         );
       }
       return value;
-    } else if (node instanceof AstFunctionCall) {
-      var expr = (AstFunctionCall) node;
+    } else if (node instanceof AstFunctionCall expr) {
       var identifier = ((AstIdentifier) expr.getFunc()).getInit();
       var args = expr.getArgs().stream().map(this::interpretNode).toList();
       if (!functions.containsKey(identifier)) {
@@ -115,17 +112,14 @@ public class TemplateInterpreter {
       return functions.get(identifier).parse(args.toArray(new Object[0]));
     } else if (node instanceof AstBinaryExpr) {
       return TemplateUtils.originate(interpretBinary((AstBinaryExpr) node));
-    } else if (node instanceof AstArrayExpr) {
-      var expr = (AstArrayExpr) node;
+    } else if (node instanceof AstArrayExpr expr) {
       return expr.getElements().stream()
           .map(this::interpretNode)
           .collect(Collectors.toList());
-    } else if (node instanceof AstMemberExpr) {
-      var expr = (AstMemberExpr) node;
+    } else if (node instanceof AstMemberExpr expr) {
       var property = interpretNode(expr.getKey());
       return parseMember(property, expr.getValue());
-    } else if (node instanceof AstObjectExpr) {
-      var expr = (AstObjectExpr) node;
+    } else if (node instanceof AstObjectExpr expr) {
       return expr.getElements().stream()
           .filter(AstObjectPropertyExpr.class::isInstance)
           .map(AstObjectPropertyExpr.class::cast)
@@ -134,13 +128,11 @@ public class TemplateInterpreter {
             return new SimpleEntry<>(identifier, interpretNode(elem.getValue()));
           })
           .collect(Collectors.toMap(SimpleEntry::getKey, SimpleEntry::getValue));
-    } else if (node instanceof AstBlockStatementExpr) {
-      var expr = (AstBlockStatementExpr) node;
+    } else if (node instanceof AstBlockStatementExpr expr) {
       return expr.getElements().stream()
           .map(this::interpretNode)
           .collect(Collectors.toList());
-    } else if (node instanceof AstIfExpr) {
-      var expr = (AstIfExpr) node;
+    } else if (node instanceof AstIfExpr expr) {
       var condition = interpretNode(expr.getCondition());
       if (Boolean.TRUE.equals(condition)) {
         return interpretNode(expr.getConsequent());
