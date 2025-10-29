@@ -27,7 +27,7 @@ Configure the following in your **build.gradle**
 
 ```groovy
 dependencies {
-  implementation 'net.jstgo.repo:template-engine:0.1.0'
+  implementation 'net.jstgo.repo:template-engine:1.0.0'
 }
 ```
 
@@ -40,7 +40,7 @@ Configure the following in your **pom.xml**
     <dependency>
       <groupId>net.jstgo.repo</groupId>
       <artifactId>template-engine</artifactId>
-      <version>0.1.0</version>
+      <version>1.0.0</version>
     </dependency>
   </dependencies>
 ```
