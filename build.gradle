@@ -23,8 +23,6 @@ String _repoPass = project.findProperty("REPO_PASSWORD") ?: System.getenv("REPO_
 // allow signing for local builds
 String _keyFile = project.findProperty("GPG_PRIVATE_KEY") ?: properties.get("GPG_PRIVATE_KEY") ?: System.getenv("GPG_PRIVATE_KEY")
 String _keyPass = project.findProperty("GPG_PASSPHRASE") ?: properties.get("GPG_PASSPHRASE") ?: System.getenv("GPG_PASSPHRASE")
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
   mavenCentral()
@@ -41,6 +39,8 @@ dependencies {
 }
 
 java {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
   withSourcesJar()
   withJavadocJar()
 }
@@ -96,7 +96,7 @@ signing {
 }
 
 wrapper {
-  gradleVersion = "7.3"
+  gradleVersion = "8.14"
   distributionType = Wrapper.DistributionType.ALL
 }
 
